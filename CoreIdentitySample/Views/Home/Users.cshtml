@@ -1,0 +1,21 @@
+﻿@model List<IdentityUser>
+@inject UserManager<IdentityUser> userManager
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h1>Users</h1>
+
+<ul>
+    @foreach (IdentityUser user in Model)
+    {
+        <li>
+            @user.UserName
+        </li>
+        @foreach (var role in await userManager.GetRolesAsync(user))
+        {
+            <li>@role</li>
+        }
+    }
+</ul>
+
